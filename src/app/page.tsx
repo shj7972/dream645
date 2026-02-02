@@ -7,8 +7,11 @@ export default function Home() {
 
             <header>
                 <div className="logo">
-                    <h1>신비의 기록</h1>
-                    <p>당신의 꿈에 담긴 비밀을 풀어보세요</p>
+                    <img src="/logo.png" alt="Dream645 Logo" className="logo-image" />
+                    <div className="logo-text">
+                        <h1>신비의 기록</h1>
+                        <p>당신의 꿈에 담긴 비밀을 풀어보세요</p>
+                    </div>
                 </div>
                 <div className="search-container">
                     <input

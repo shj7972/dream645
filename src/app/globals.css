@@ -43,21 +43,57 @@ header {
     background: linear-gradient(180deg, rgba(11, 14, 20, 0.8) 0%, transparent 100%);
 }
 
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.logo-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(167, 139, 250, 0.4);
+    animation: float 6s ease-in-out infinite;
+}
+
+.logo-text {
+    text-align: left;
+}
+
 .logo h1 {
-    font-size: 3.5rem;
+    font-size: 3rem;
     font-weight: 700;
     background: linear-gradient(to right, #ffffff, #a78bfa, #818cf8);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: -1px;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0px;
+    line-height: 1.1;
 }
 
 .logo p {
     color: var(--text-secondary);
-    font-size: 1.1rem;
+    font-size: 1rem;
     letter-spacing: 2px;
+    margin-top: 0.2rem;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
 }
 
 .search-container {
