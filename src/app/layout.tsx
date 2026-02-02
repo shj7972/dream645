@@ -1,5 +1,6 @@
 import './globals.css'
 import type { Metadata } from 'next'
+import Script from 'next/script'
 
 export const metadata: Metadata = {
     metadataBase: new URL('https://www.dream645.kr'),
@@ -45,7 +46,22 @@ export default function RootLayout({
 }) {
     return (
         <html lang="ko">
-            <body>{children}</body>
+            <body>
+                {children}
+                <Script
+                    src="https://www.googletagmanager.com/gtag/js?id=G-WHWQBZ6E8H"
+                    strategy="afterInteractive"
+                />
+                <Script id="google-analytics" strategy="afterInteractive">
+                    {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-WHWQBZ6E8H');
+          `}
+                </Script>
+            </body>
         </html>
     )
 }
