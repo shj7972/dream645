@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     verification: {
         google: 'v_7_s_i_e_r_i_f_i_c_a_t_i_o_n_c_o_d_e', // Placeholder
         other: {
-            'naver-site-verification': 'v_7_s_i_e_r_i_f_i_c_a_t_i_o_n_c_o_d_e', // Placeholder
+            'naver-site-verification': 'ca3bdee8fb6502de13dfbf1cd243971587a0b2e5',
         },
     },
 }
