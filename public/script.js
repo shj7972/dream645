@@ -171,6 +171,10 @@
             <span class="dream-type type-${dream.type}">${typeLabel}</span>
             <h2>${dream.title}</h2>
             <p class="rich-text">${dream.summary}</p>
+            <div class="detail-content rich-text" style="margin: 1.5rem 0; line-height: 1.8; color: #444;">
+                <h3 style="margin-bottom: 10px; font-size: 1.2rem; color: #5a4b81;">🔮 상세 해몽</h3>
+                <p>${dream.detail}</p>
+            </div>
             <div class="action-tip-box rich-text">
                 <h4>행동 팁</h4>
                 <p>${dream.action_tip}</p>

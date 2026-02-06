@@ -1,0 +1,22 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="moon_grad" x1="40" y1="40" x2="160" y2="160" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#a78bfa" />
+      <stop offset="100%" stop-color="#6366f1" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  
+  <!-- Crescent Moon -->
+  <path d="M140 100C140 144.183 104.183 180 60 180C45 180 30 175 20 165C50 165 75 140 75 100C75 60 50 35 20 35C30 25 45 20 60 20C104.183 20 140 55.8172 140 100Z" 
+        fill="url(#moon_grad)" 
+        filter="url(#glow)"/>
+        
+  <!-- Stars -->
+  <path d="M160 50L163 58L171 58L165 64L167 72L160 67L153 72L155 64L149 58L157 58L160 50Z" fill="#fbbf24" filter="url(#glow)"/>
+  <path d="M130 150L132 155L137 155L133 159L134 164L130 161L126 164L127 159L123 155L128 155L130 150Z" fill="#fbbf24" opacity="0.8"/>
+  <path d="M170 120L171.5 124L175 124L172 127L173 131L170 128.5L167 131L168 127L165 124L168.5 124L170 120Z" fill="#fbbf24" opacity="0.6"/>
+</svg>
