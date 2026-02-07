@@ -1,12 +1,12 @@
 import { MetadataRoute } from 'next'
-import dreamsData from '../data/dreams.json'
+import dreamsData from '../data/dreams_new.json'
 
-// Define the Dream interface based on the JSON structure
 interface Dream {
     id: string
     title: string
     type: string
     summary: string
+    detail: string
     lucky_numbers: number[]
     action_tip: string
 }
@@ -15,17 +15,35 @@ const dreams: Dream[] = dreamsData as Dream[]
 const BASE_URL = 'https://www.dream645.kr'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    // Static routes
-    const routes: MetadataRoute.Sitemap = [
+    // 정적 라우트
+    const staticRoutes: MetadataRoute.Sitemap = [
         {
             url: BASE_URL,
             lastModified: new Date(),
             changeFrequency: 'daily',
             priority: 1.0,
         },
+        {
+            url: `${BASE_URL}/category/good`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.9,
+        },
+        {
+            url: `${BASE_URL}/category/bad`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.9,
+        },
+        {
+            url: `${BASE_URL}/category/baby`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.9,
+        },
     ]
 
-    // Dynamic routes from dreams.json
+    // 개별 꿈 상세 페이지 라우트
     const dreamRoutes = dreams.map((dream) => ({
         url: `${BASE_URL}/dream/${dream.id}`,
         lastModified: new Date(),
@@ -33,5 +51,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.8,
     }))
 
-    return [...routes, ...dreamRoutes]
+    return [...staticRoutes, ...dreamRoutes]
 }

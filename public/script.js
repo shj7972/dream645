@@ -323,7 +323,6 @@
         });
 
         fetchDreams();
-        fetchDreams();
     };
 
     if (document.readyState === 'loading') {
