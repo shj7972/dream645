@@ -14,6 +14,9 @@
         let favorites = JSON.parse(localStorage.getItem('dream_favorites') || '[]');
         let currentFilter = 'all';
         let currentDream = null;
+        let currentPage = 1;
+        const itemsPerPage = 12;
+        let currentFilteredDreams = [];
 
         // Fetch dreams from API
         async function fetchDreams() {
@@ -28,13 +31,22 @@
         }
 
         function renderDreams(dreams) {
+            currentFilteredDreams = dreams;
             dreamGrid.innerHTML = '';
+
             if (dreams.length === 0) {
                 dreamGrid.innerHTML = '<p class="no-results">검색 결과가 없습니다.</p>';
+                renderPagination(0);
                 return;
             }
 
-            dreams.forEach((dream, index) => {
+            const totalPages = Math.ceil(dreams.length / itemsPerPage);
+            if (currentPage > totalPages) currentPage = totalPages;
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const pageDreams = dreams.slice(startIndex, endIndex);
+
+            pageDreams.forEach((dream, index) => {
                 const isFav = favorites.includes(dream.id);
                 const card = document.createElement('div');
                 card.className = `dream-card ${isFav ? 'is-fav' : ''}`;
@@ -59,6 +71,83 @@
                 card.addEventListener('click', () => openModal(dream));
                 dreamGrid.appendChild(card);
             });
+
+            renderPagination(totalPages);
+        }
+
+        function renderPagination(totalPages) {
+            let paginationContainer = document.getElementById('pagination');
+            if (!paginationContainer) {
+                paginationContainer = document.createElement('div');
+                paginationContainer.id = 'pagination';
+                paginationContainer.className = 'pagination';
+                dreamGrid.parentNode.insertBefore(paginationContainer, dreamGrid.nextSibling);
+            }
+            paginationContainer.innerHTML = '';
+
+            if (totalPages <= 1) return;
+
+            // Previous button
+            const prevBtn = document.createElement('button');
+            prevBtn.className = `page-btn ${currentPage === 1 ? 'disabled' : ''}`;
+            prevBtn.textContent = '◀';
+            prevBtn.disabled = currentPage === 1;
+            prevBtn.addEventListener('click', () => goToPage(currentPage - 1));
+            paginationContainer.appendChild(prevBtn);
+
+            // Page numbers with ellipsis
+            const maxVisible = 5;
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+            if (endPage - startPage < maxVisible - 1) {
+                startPage = Math.max(1, endPage - maxVisible + 1);
+            }
+
+            if (startPage > 1) {
+                addPageBtn(paginationContainer, 1);
+                if (startPage > 2) {
+                    const dots = document.createElement('span');
+                    dots.className = 'page-dots';
+                    dots.textContent = '···';
+                    paginationContainer.appendChild(dots);
+                }
+            }
+
+            for (let i = startPage; i <= endPage; i++) {
+                addPageBtn(paginationContainer, i);
+            }
+
+            if (endPage < totalPages) {
+                if (endPage < totalPages - 1) {
+                    const dots = document.createElement('span');
+                    dots.className = 'page-dots';
+                    dots.textContent = '···';
+                    paginationContainer.appendChild(dots);
+                }
+                addPageBtn(paginationContainer, totalPages);
+            }
+
+            // Next button
+            const nextBtn = document.createElement('button');
+            nextBtn.className = `page-btn ${currentPage === totalPages ? 'disabled' : ''}`;
+            nextBtn.textContent = '▶';
+            nextBtn.disabled = currentPage === totalPages;
+            nextBtn.addEventListener('click', () => goToPage(currentPage + 1));
+            paginationContainer.appendChild(nextBtn);
+        }
+
+        function addPageBtn(container, pageNum) {
+            const btn = document.createElement('button');
+            btn.className = `page-btn ${pageNum === currentPage ? 'active' : ''}`;
+            btn.textContent = pageNum;
+            btn.addEventListener('click', () => goToPage(pageNum));
+            container.appendChild(btn);
+        }
+
+        function goToPage(page) {
+            currentPage = page;
+            renderDreams(currentFilteredDreams);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function openModal(dream) {
@@ -293,10 +382,11 @@
 
         // Filter and Search Logic
         function handleSearchAndFilter() {
+            currentPage = 1;
             const query = searchInput.value.toLowerCase();
             const filtered = allDreams.filter(dream => {
                 const matchesQuery = dream.title.toLowerCase().includes(query) ||
-                    dream.summary.toLowerCase().includes(query);
+                    (dream.summary && dream.summary.toLowerCase().includes(query));
                 const matchesFilter = currentFilter === 'all' ||
                     (currentFilter === 'fav' ? favorites.includes(dream.id) : dream.type === currentFilter);
                 return matchesQuery && matchesFilter;
