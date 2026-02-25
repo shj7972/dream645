@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import dreamsData from '../data/dreams_new.json'
+import blogPosts from '../data/blog_posts.json'
 
 interface Dream {
     id: string
@@ -41,6 +42,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'weekly',
             priority: 0.9,
         },
+        {
+            url: `${BASE_URL}/blog`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.9,
+        },
     ]
 
     // 개별 꿈 상세 페이지 라우트
@@ -51,5 +58,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.8,
     }))
 
-    return [...staticRoutes, ...dreamRoutes]
+    // 블로그 글 라우트
+    const blogRoutes = blogPosts.map((post) => ({
+        url: `${BASE_URL}/blog/${post.slug}`,
+        lastModified: new Date(post.date),
+        changeFrequency: 'monthly' as const,
+        priority: 0.85,
+    }))
+
+    return [...staticRoutes, ...dreamRoutes, ...blogRoutes]
 }

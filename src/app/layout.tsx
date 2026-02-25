@@ -47,7 +47,7 @@ export const metadata: Metadata = {
         type: 'website',
         images: [
             {
-                url: '/og-image.png',
+                url: '/og-image.jpg',
                 width: 1200,
                 height: 630,
                 alt: 'Dream645 - 무료 꿈해몽과 로또 번호 추천 서비스',
@@ -59,10 +59,9 @@ export const metadata: Metadata = {
         title: 'Dream645 - 무료 꿈해몽 & 로또 번호 추천',
         description:
             '어젯밤 꿈이 로또 당첨의 신호일까요? 꿈해몽 분석과 AI가 추천하는 행운의 번호를 무료로 확인하세요.',
-        images: ['/og-image.png'],
+        images: ['/og-image.jpg'],
     },
     verification: {
-        google: 'v_7_s_i_e_r_i_f_i_c_a_t_i_o_n_c_o_d_e', // TODO: Google Search Console에서 실제 코드 발급 후 교체
         other: {
             'naver-site-verification': 'ca3bdee8fb6502de13dfbf1cd243971587a0b2e5',
         },

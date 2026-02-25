@@ -115,7 +115,7 @@ export async function generateMetadata({
             type: 'website',
             images: [
                 {
-                    url: '/og-image.png',
+                    url: '/og-image.jpg',
                     width: 1200,
                     height: 630,
                     alt: `Dream645 ${meta.label} 꿈해몽`,

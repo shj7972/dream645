@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import dreamsData from '@/data/dreams_new.json'
+import ShareButtons from '@/app/components/ShareButtons'
 
 interface Dream {
     id: string
@@ -75,20 +76,13 @@ export async function generateMetadata({
             siteName: 'Dream645',
             locale: 'ko_KR',
             type: 'article',
-            images: [
-                {
-                    url: `/og-image.png`,
-                    width: 1200,
-                    height: 630,
-                    alt: `${dream.title} - Dream645 꿈해몽`,
-                },
-            ],
+            // OG 이미지는 opengraph-image.tsx에서 자동 생성됨
         },
         twitter: {
             card: 'summary_large_image',
             title,
             description,
-            images: ['/og-image.png'],
+            // Twitter 이미지도 opengraph-image.tsx에서 자동 생성됨
         },
     }
 }
@@ -263,13 +257,20 @@ export default async function DreamDetailPage({
 
                     {/* 이미지 */}
                     <div className="modal-image-container">
-                        <img
-                            src={`/cat_${dream.type}.png`}
-                            alt={`${dream.title} - ${typeLabel} 꿈해몽 이미지`}
-                            className="modal-cat-image"
-                            width={700}
-                            height={250}
-                        />
+                        <picture>
+                            <source
+                                srcSet={`/cat_${dream.type}.webp`}
+                                type="image/webp"
+                            />
+                            <img
+                                src={`/cat_${dream.type}.png`}
+                                alt={`${dream.title} - ${typeLabel} 꿈해몽 이미지`}
+                                className="modal-cat-image"
+                                width={700}
+                                height={250}
+                                loading="lazy"
+                            />
+                        </picture>
                     </div>
 
                     {/* 요약 */}
@@ -301,6 +302,16 @@ export default async function DreamDetailPage({
                             ))}
                         </div>
                     </section>
+
+                    {/* 공유 버튼 */}
+                    <ShareButtons
+                        title={`${dream.title} 해몽`}
+                        description={dream.summary}
+                        url={`https://www.dream645.kr/dream/${dream.id}`}
+                        imageUrl={`https://www.dream645.kr/og-image.jpg`}
+                        type={dream.type}
+                        luckyNumbers={dream.lucky_numbers}
+                    />
 
                     {/* FAQ 섹션 */}
                     <section className="faq-section" aria-label="자주 묻는 질문">
