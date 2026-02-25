@@ -149,9 +149,7 @@ export default function ShareButtons({
     return (
         <>
             <Script
-                src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js"
-                integrity="sha384-DKYJZ8NLiK8MN4/C5P2ezmFnkrWAhl/gb6LiQSbFG8bk38C9+kBfDCX3K3fVEJl"
-                crossOrigin="anonymous"
+                src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.9/kakao.min.js"
                 strategy="afterInteractive"
                 onLoad={initKakao}
             />
