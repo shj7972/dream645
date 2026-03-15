@@ -61,9 +61,24 @@ export async function generateMetadata({
         return { title: '글을 찾을 수 없습니다 | Dream645' }
     }
 
+    const categoryConfig: Record<string, string[]> = {
+        guide: ['꿈해몽 방법', '꿈 해석 가이드', '꿈해몽 총정리', '꿈해몽 하는법'],
+        tip: ['꿈해몽 팁', '꿈 활용법', '꿈해몽 노하우', '로또 꿈 번호'],
+        knowledge: ['꿈 지식', '꿈 상징', '꿈해몽 원리', '꿈 심리학'],
+    }
+
     return {
         title: `${post.title} | Dream645 블로그`,
         description: post.description,
+        keywords: [
+            post.title,
+            '꿈해몽',
+            '꿈 해석',
+            '꿈풀이',
+            ...(categoryConfig[post.category] ?? []),
+            '무료 꿈해몽',
+            '2026년 꿈해몽',
+        ],
         alternates: {
             canonical: `https://www.dream645.kr/blog/${post.slug}`,
         },
@@ -75,11 +90,21 @@ export async function generateMetadata({
             locale: 'ko_KR',
             type: 'article',
             publishedTime: post.date,
+            modifiedTime: post.date,
+            images: [
+                {
+                    url: `https://www.dream645.kr/blog/${post.slug}/opengraph-image`,
+                    width: 1200,
+                    height: 630,
+                    alt: post.title,
+                },
+            ],
         },
         twitter: {
             card: 'summary_large_image',
             title: post.title,
             description: post.description,
+            images: [`https://www.dream645.kr/blog/${post.slug}/opengraph-image`],
         },
     }
 }
@@ -112,6 +137,7 @@ export default async function BlogDetailPage({
         headline: post.title,
         description: post.description,
         datePublished: post.date,
+        dateModified: post.date,
         author: {
             '@type': 'Organization',
             name: 'Dream645',

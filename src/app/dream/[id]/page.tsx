@@ -22,6 +22,9 @@ const TYPE_LABELS: Record<string, string> = {
     baby: '태몽',
 }
 
+// 콘텐츠 최종 업데이트 날짜 (대규모 콘텐츠 갱신 시 업데이트)
+const CONTENT_UPDATED_AT = '2026-02-20'
+
 const TYPE_EMOJI: Record<string, string> = {
     good: '🍀',
     bad: '🧿',
@@ -61,10 +64,18 @@ export async function generateMetadata({
             `${keyword} 꿈해몽`,
             `${keyword} 꿈 의미`,
             `${keyword} 꿈 해석`,
+            `${keyword} 꿈 뜻`,
+            `${keyword} 꿈 ${typeLabel}`,
+            `${keyword} 꿈 로또번호`,
+            `${keyword} 꿈 행운의 숫자`,
             typeLabel,
+            `${typeLabel} 꿈해몽`,
+            `${typeLabel} 꿈 종류`,
             '꿈해몽',
             '로또번호',
             '꿈풀이',
+            '무료 꿈해몽',
+            '2026년 꿈해몽',
         ],
         alternates: {
             canonical: `https://www.dream645.kr/dream/${dream.id}`,
@@ -76,6 +87,8 @@ export async function generateMetadata({
             siteName: 'Dream645',
             locale: 'ko_KR',
             type: 'article',
+            publishedTime: CONTENT_UPDATED_AT,
+            modifiedTime: CONTENT_UPDATED_AT,
             // OG 이미지는 opengraph-image.tsx에서 자동 생성됨
         },
         twitter: {
@@ -123,6 +136,8 @@ export default async function DreamDetailPage({
         '@type': 'Article',
         headline: `${dream.title} 해몽`,
         description: dream.summary,
+        datePublished: CONTENT_UPDATED_AT,
+        dateModified: CONTENT_UPDATED_AT,
         author: {
             '@type': 'Organization',
             name: 'Dream645',
