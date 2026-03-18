@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import ContactForm from './ContactForm'
 
 export const metadata: Metadata = {
     title: '문의하기 | Dream645',
@@ -38,54 +39,14 @@ export default function ContactPage() {
                     <section className="rich-text" style={{ marginBottom: '2rem' }}>
                         <p>
                             Dream645 신비의 기록을 이용해 주셔서 감사합니다.
-                            서비스 관련 문의 사항이 있으시면 아래 이메일로
-                            연락해 주세요. 접수 후 <strong>10영업일 이내</strong>에
-                            답변 드리겠습니다.
+                            아래 양식을 작성하시면 담당자가 확인 후{' '}
+                            <strong>10영업일 이내</strong>에 답변 드립니다.
                         </p>
                     </section>
 
-                    <section className="action-tip-box" style={{ marginBottom: '2rem' }}>
-                        <h2>📧 이메일 문의</h2>
-                        <p style={{ marginBottom: '0.5rem' }}>
-                            <a
-                                href="mailto:contact@dream645.kr"
-                                style={{
-                                    color: 'var(--accent-color)',
-                                    fontSize: '1.1rem',
-                                    fontWeight: '700',
-                                }}
-                            >
-                                contact@dream645.kr
-                            </a>
-                        </p>
-                        <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-                            답변 기간: 영업일 기준 10일 이내
-                        </p>
-                    </section>
+                    <ContactForm />
 
-                    <section className="rich-text" style={{ marginBottom: '2rem' }}>
-                        <h2>문의 유형</h2>
-                        <ul style={{ paddingLeft: '1.5rem', marginTop: '0.75rem' }}>
-                            <li>
-                                <strong>콘텐츠 오류 제보</strong> — 꿈해몽 내용 중 잘못된
-                                해석이나 오탈자를 발견하셨다면 알려주세요.
-                            </li>
-                            <li>
-                                <strong>서비스 개선 의견</strong> — 기능 개선 아이디어나
-                                불편한 점을 공유해 주세요.
-                            </li>
-                            <li>
-                                <strong>개인정보 관련 문의</strong> — 개인정보 처리에 관한
-                                열람·삭제·정지 요청을 처리해 드립니다.
-                            </li>
-                            <li>
-                                <strong>광고·제휴 문의</strong> — 광고 또는 콘텐츠 제휴를
-                                원하시면 이메일로 연락해 주세요.
-                            </li>
-                        </ul>
-                    </section>
-
-                    <section className="rich-text" style={{ marginBottom: '2rem' }}>
+                    <section className="rich-text" style={{ marginTop: '2.5rem', marginBottom: '2rem' }}>
                         <h2>자주 묻는 질문</h2>
                         <div className="faq-list">
                             <details className="faq-detail">

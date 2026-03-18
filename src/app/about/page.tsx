@@ -108,19 +108,8 @@ export default function AboutPage() {
                     <section className="rich-text" style={{ marginBottom: '2rem' }}>
                         <h2>연락처</h2>
                         <p>
-                            서비스 관련 문의, 콘텐츠 오류 제보, 광고 문의는 아래로 연락해 주세요.
+                            서비스 관련 문의, 콘텐츠 오류 제보, 광고 문의는 문의 페이지를 이용해 주세요.
                         </p>
-                        <ul style={{ paddingLeft: '1.5rem', marginTop: '0.75rem' }}>
-                            <li>
-                                이메일:{' '}
-                                <a
-                                    href="mailto:contact@dream645.kr"
-                                    style={{ color: 'var(--accent-color)' }}
-                                >
-                                    contact@dream645.kr
-                                </a>
-                            </li>
-                        </ul>
                         <p style={{ marginTop: '0.75rem' }}>
                             <Link href="/contact" style={{ color: 'var(--accent-color)' }}>
                                 문의 페이지 바로가기 →

@@ -148,13 +148,10 @@ export default function PrivacyPage() {
                         <ul style={{ paddingLeft: '1.5rem', marginTop: '0.75rem' }}>
                             <li>서비스명: Dream645 신비의 기록</li>
                             <li>
-                                이메일:{' '}
-                                <a
-                                    href="mailto:contact@dream645.kr"
-                                    style={{ color: 'var(--accent-color)' }}
-                                >
-                                    contact@dream645.kr
-                                </a>
+                                문의:{' '}
+                                <Link href="/contact" style={{ color: 'var(--accent-color)' }}>
+                                    문의 페이지 바로가기
+                                </Link>
                             </li>
                             <li>처리 기간: 접수 후 10영업일 이내</li>
                         </ul>
