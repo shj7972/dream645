@@ -20,7 +20,7 @@ export default function ContactForm() {
         setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
     }
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         setFormState('loading')
         setErrorMsg('')
@@ -31,10 +31,15 @@ export default function ContactForm() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(form),
             })
-            const data = await res.json()
+            let data: { error?: string; success?: boolean } = {}
+            try {
+                data = await res.json()
+            } catch {
+                // JSON 파싱 실패 = 서버 에러
+            }
 
             if (!res.ok) {
-                setErrorMsg(data.error ?? '오류가 발생했습니다.')
+                setErrorMsg(data.error ?? `서버 오류가 발생했습니다. (${res.status})`)
                 setFormState('error')
                 return
             }
