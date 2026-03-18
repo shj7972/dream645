@@ -313,6 +313,13 @@ export default async function BlogDetailPage({
             </main>
 
             <footer>
+                <div className="footer-links">
+                    <Link href="/about">서비스 소개</Link>
+                    <span>|</span>
+                    <Link href="/privacy">개인정보처리방침</Link>
+                    <span>|</span>
+                    <Link href="/contact">문의하기</Link>
+                </div>
                 <p>&copy; 2026 Dream645 신비의 기록. All rights reserved.</p>
             </footer>
         </>

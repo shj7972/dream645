@@ -453,6 +453,30 @@ footer {
     font-size: 0.9rem;
 }
 
+.footer-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+}
+
+.footer-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: var(--accent-color);
+}
+
+.footer-links span {
+    color: var(--glass-border);
+}
+
 /* Home Category Navigation */
 .home-category-nav {
     display: flex;

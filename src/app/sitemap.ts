@@ -48,6 +48,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'weekly',
             priority: 0.9,
         },
+        {
+            url: `${BASE_URL}/about`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.6,
+        },
+        {
+            url: `${BASE_URL}/privacy`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.4,
+        },
+        {
+            url: `${BASE_URL}/contact`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.5,
+        },
     ]
 
     // 개별 꿈 상세 페이지 라우트

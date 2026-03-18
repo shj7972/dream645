@@ -116,6 +116,13 @@ export default async function DreamDetailPage({
     const typeEmoji = TYPE_EMOJI[dream.type]
     const keyword = dream.title.replace(/ 꿈$/, '')
 
+    // 꿈 유형별 맞춤 인트로 문구
+    const typeIntro: Record<string, string> = {
+        good: `${keyword} 꿈은 전통 해몽에서 좋은 소식을 알리는 길몽으로 해석됩니다. 재물운·건강운·대인운 중 어느 방면에서 행운이 찾아올지, 상세 해몽을 통해 확인해 보세요.`,
+        bad: `${keyword} 꿈은 흉몽으로 분류되지만, 반드시 나쁜 일이 일어난다는 의미가 아닙니다. 꿈이 전하는 경고 메시지를 읽고 미리 대비하면 오히려 액땜이 될 수 있습니다.`,
+        baby: `${keyword} 꿈은 태몽으로 해석되는 경우가 많습니다. 아이의 탄생을 예고하거나 임신 중 꾸는 특별한 꿈인 태몽의 의미를 전통 해몽 관점에서 풀어드립니다.`,
+    }
+
     // 관련 꿈 추천: 같은 타입 우선, 최대 6개
     const relatedDreams = dreams
         .filter((d) => d.id !== dream.id && d.type === dream.type)
@@ -256,18 +263,7 @@ export default async function DreamDetailPage({
 
                     {/* 인트로 섹션 */}
                     <section className="intro-section rich-text">
-                        <p>
-                            많은 분들이{' '}
-                            <strong className="text-highlight">
-                                {keyword}
-                            </strong>{' '}
-                            꿈을 꾸고 그 의미를 궁금해합니다. 이 꿈은{' '}
-                            <strong className="text-highlight">
-                                {typeLabel}
-                            </strong>
-                            으로 분류되며, 구체적인 해몽과 행운의 숫자를 아래에서
-                            확인해 보세요.
-                        </p>
+                        <p>{typeIntro[dream.type]}</p>
                     </section>
 
                     {/* 이미지 */}
@@ -425,6 +421,13 @@ export default async function DreamDetailPage({
             </main>
 
             <footer>
+                <div className="footer-links">
+                    <Link href="/about">서비스 소개</Link>
+                    <span>|</span>
+                    <Link href="/privacy">개인정보처리방침</Link>
+                    <span>|</span>
+                    <Link href="/contact">문의하기</Link>
+                </div>
                 <p>&copy; 2026 Dream645 신비의 기록. All rights reserved.</p>
             </footer>
         </>
