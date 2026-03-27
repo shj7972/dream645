@@ -684,6 +684,19 @@ footer {
     font-size: 1.05rem;
 }
 
+.rich-section {
+    margin-bottom: 1.8rem;
+}
+
+.rich-section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #c4b5fd;
+    margin-bottom: 0.6rem;
+    padding-left: 0.8rem;
+    border-left: 3px solid #7c3aed;
+}
+
 .text-highlight {
     color: var(--accent-color);
     font-weight: 700;
@@ -984,6 +997,28 @@ footer {
     border-color: #FFEB3B;
 }
 
+.share-btn-naver {
+    background: #03C75A;
+    color: #fff;
+    border-color: #03C75A;
+}
+
+.share-btn-naver:hover {
+    background: #02b050;
+    border-color: #02b050;
+}
+
+.share-btn-x {
+    background: #000;
+    color: #fff;
+    border-color: #333;
+}
+
+.share-btn-x:hover {
+    background: #1a1a1a;
+    border-color: #555;
+}
+
 .share-btn-native:hover {
     background: rgba(167, 139, 250, 0.2);
     border-color: var(--accent-color);
@@ -991,6 +1026,21 @@ footer {
 
 .share-btn-copy:hover {
     background: rgba(255, 255, 255, 0.1);
+}
+
+.blog-share-section {
+    margin: 2.5rem 0;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    text-align: center;
+}
+
+.blog-share-label {
+    font-size: 0.95rem;
+    color: #94a3b8;
+    margin-bottom: 1rem;
 }
 
 @media (max-width: 600px) {

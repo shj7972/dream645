@@ -17,16 +17,16 @@ const dreams: Dream[] = dreamsData as Dream[]
 
 const VALID_TYPES = ['good', 'bad', 'baby'] as const
 
-const TYPE_META: Record<
-    string,
-    {
-        label: string
-        emoji: string
-        title: string
-        description: string
-        keywords: string[]
-    }
-> = {
+interface TypeMeta {
+    label: string
+    emoji: string
+    title: string
+    description: string
+    keywords: string[]
+    faq: { question: string; answer: string }[]
+}
+
+const TYPE_META: Record<string, TypeMeta> = {
     good: {
         label: '길몽',
         emoji: '🍀',
@@ -47,6 +47,24 @@ const TYPE_META: Record<
             '돈 생기는 꿈',
             '무료 꿈해몽',
             '2026년 길몽',
+        ],
+        faq: [
+            {
+                question: '길몽이란 무엇인가요?',
+                answer: '길몽(吉夢)은 좋은 일이 일어날 것을 예고하는 꿈입니다. 재물운, 건강운, 명예운, 애정운 등 삶의 긍정적인 변화를 앞두고 나타나는 꿈으로, 황금돼지·용·잉어 등이 등장하는 꿈이 대표적입니다.',
+            },
+            {
+                question: '길몽을 꾸면 어떻게 해야 하나요?',
+                answer: '길몽을 꾼 날은 오랫동안 미뤄왔던 중요한 결정이나 새로운 시작을 실행하기 좋은 날입니다. 로또나 복권을 가볍게 구입해 보는 것도 좋은 방법입니다. 무엇보다 긍정적인 마음가짐으로 하루를 시작하는 것이 중요합니다.',
+            },
+            {
+                question: '길몽을 꾸면 반드시 좋은 일이 생기나요?',
+                answer: '길몽이 반드시 좋은 일을 보장하지는 않습니다. 하지만 길몽을 꾼 날 긍정적인 에너지를 유지하면 주변의 기회에 더욱 열린 자세로 임하게 되어 좋은 결과를 만들어낼 가능성이 높아집니다.',
+            },
+            {
+                question: '가장 강력한 재물 길몽은 무엇인가요?',
+                answer: '전통 꿈해몽에서 가장 강력한 재물 길몽은 황금돼지가 집에 들어오는 꿈, 용이 하늘로 승천하는 꿈, 하늘에서 돈이 비처럼 쏟아지는 꿈 등입니다. 돈다발을 줍는 꿈이나 뱀이 몸을 감는 꿈도 강한 재물운을 예고합니다.',
+            },
         ],
     },
     bad: {
@@ -70,6 +88,24 @@ const TYPE_META: Record<
             '무료 꿈해몽',
             '2026년 흉몽',
         ],
+        faq: [
+            {
+                question: '흉몽을 꾸면 반드시 나쁜 일이 생기나요?',
+                answer: '흉몽이 반드시 나쁜 일을 의미하지는 않습니다. 전통 꿈해몽에서는 흉몽이 오히려 액땜의 역할을 한다고 봅니다. 꿈에서 나쁜 일을 겪었으니 현실에서는 그 위험이 비켜간다는 해석입니다.',
+            },
+            {
+                question: '흉몽을 꿨을 때 액땜 방법은 무엇인가요?',
+                answer: '흉몽 후에는 굵은 소금을 현관에 뿌리거나 베개 아래 놓는 전통적인 방법이 있습니다. 또한 빨간 팥죽을 먹거나 밝은 색 옷을 입는 것도 나쁜 기운을 쫓는 전통적인 방법입니다. 심리적으로는 꿈이 전하는 경고를 현실에서 미리 준비하고 대비하는 것이 가장 현명한 방법입니다.',
+            },
+            {
+                question: '흉몽과 길몽의 차이는 무엇인가요?',
+                answer: '길몽은 재물·명예·건강 등 긍정적인 변화를 예고하는 꿈이고, 흉몽은 주의가 필요한 상황이나 경고를 담은 꿈입니다. 하지만 꿈의 의미는 고정된 것이 아니라 꿈꾼 사람의 상황과 세부 내용에 따라 달라집니다.',
+            },
+            {
+                question: '반복되는 악몽의 의미는 무엇인가요?',
+                answer: '반복되는 악몽은 현실에서 해결하지 못한 문제나 스트레스가 있다는 강한 신호입니다. 꿈이 전하는 메시지를 파악하고 현실의 해당 문제에 적극적으로 대처하는 것이 악몽을 없애는 근본적인 방법입니다.',
+            },
+        ],
     },
     baby: {
         label: '태몽',
@@ -91,6 +127,24 @@ const TYPE_META: Record<
             '태몽 꿈 의미',
             '무료 꿈해몽',
             '2026년 태몽',
+        ],
+        faq: [
+            {
+                question: '태몽이란 무엇인가요?',
+                answer: '태몽은 임신 전후로 임산부 본인 또는 가까운 가족이 꾸는 특별한 꿈입니다. 보통 매우 생생하고 기억에 오래 남는 것이 특징으로, 전통적으로 태어날 아이의 성격·재능·미래를 예고한다고 여겨집니다.',
+            },
+            {
+                question: '태몽으로 아이 성별을 알 수 있나요?',
+                answer: '과학적으로 태몽과 성별 사이의 인과관계는 증명되지 않았습니다. 전통적으로 호랑이·용·큰 동물은 아들, 꽃·나비·보석은 딸을 예고한다고 알려져 있습니다. 재미있는 참고 자료로만 활용하시고 정확한 성별 확인은 초음파 검사로 하시기 바랍니다.',
+            },
+            {
+                question: '태몽은 누가 꿀 수 있나요?',
+                answer: '태몽은 임산부 본인뿐만 아니라 배우자, 부모님, 형제자매 등 가까운 가족도 꿀 수 있습니다. 심지어 임신 전에 미리 꾸는 경우도 있으며, 꿈이 특별히 생생하고 강렬하다면 태몽일 가능성이 높습니다.',
+            },
+            {
+                question: '가장 길한 태몽은 무엇인가요?',
+                answer: '전통 꿈해몽에서 가장 길한 태몽으로는 용이 나타나는 꿈, 호랑이가 품에 안는 꿈, 봉황이 날아오는 꿈이 꼽힙니다. 황금빛 물체나 빛나는 태양이 등장하는 꿈도 귀한 아이의 탄생을 예고하는 최상급 태몽입니다.',
+            },
         ],
     },
 }
@@ -190,6 +244,20 @@ export default async function CategoryPage({
         },
     }
 
+    // FAQPage JSON-LD
+    const faqJsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: meta.faq.map((item) => ({
+            '@type': 'Question',
+            name: item.question,
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: item.answer,
+            },
+        })),
+    }
+
     return (
         <>
             <script
@@ -202,6 +270,12 @@ export default async function CategoryPage({
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{
                     __html: JSON.stringify(collectionJsonLd),
+                }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify(faqJsonLd),
                 }}
             />
 

@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import blogPosts from '@/data/blog_posts.json'
 import dreamsData from '@/data/dreams_new.json'
+import BlogShareButtons from '@/app/components/BlogShareButtons'
 
 interface BlogPost {
     slug: string
@@ -67,6 +68,14 @@ export async function generateMetadata({
         knowledge: ['꿈 지식', '꿈 상징', '꿈해몽 원리', '꿈 심리학'],
     }
 
+    // 제목에서 핵심 키워드 추출 (2~5글자 명사 토큰)
+    const titleKeywords = post.title
+        .replace(/[—\-·|]/g, ' ')
+        .split(/\s+/)
+        .filter((w) => w.length >= 2 && w.length <= 8)
+        .slice(0, 5)
+        .map((w) => `${w} 해몽`)
+
     return {
         title: `${post.title} | Dream645 블로그`,
         description: post.description,
@@ -75,6 +84,7 @@ export async function generateMetadata({
             '꿈해몽',
             '꿈 해석',
             '꿈풀이',
+            ...titleKeywords,
             ...(categoryConfig[post.category] ?? []),
             '무료 꿈해몽',
             '2026년 꿈해몽',
@@ -157,6 +167,37 @@ export default async function BlogDetailPage({
         },
     }
 
+    // FAQ Schema: 헤딩-단락 쌍에서 자동 생성 (최대 4개)
+    const faqPairs: { question: string; answer: string }[] = []
+    for (let i = 0; i < post.content.length - 1; i++) {
+        if (
+            post.content[i].type === 'heading' &&
+            post.content[i + 1].type === 'paragraph'
+        ) {
+            faqPairs.push({
+                question: post.content[i].text,
+                answer: post.content[i + 1].text,
+            })
+            if (faqPairs.length >= 4) break
+        }
+    }
+
+    const faqJsonLd =
+        faqPairs.length > 0
+            ? {
+                  '@context': 'https://schema.org',
+                  '@type': 'FAQPage',
+                  mainEntity: faqPairs.map((pair) => ({
+                      '@type': 'Question',
+                      name: pair.question,
+                      acceptedAnswer: {
+                          '@type': 'Answer',
+                          text: pair.answer,
+                      },
+                  })),
+              }
+            : null
+
     const breadcrumbJsonLd = {
         '@context': 'https://schema.org',
         '@type': 'BreadcrumbList',
@@ -189,6 +230,14 @@ export default async function BlogDetailPage({
                     __html: JSON.stringify(articleJsonLd),
                 }}
             />
+            {faqJsonLd && (
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify(faqJsonLd),
+                    }}
+                />
+            )}
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{
@@ -243,6 +292,13 @@ export default async function BlogDetailPage({
                         })}
                     </div>
                 </article>
+
+                {/* 공유 버튼 */}
+                <BlogShareButtons
+                    title={post.title}
+                    description={post.description}
+                    url={`https://www.dream645.kr/blog/${post.slug}`}
+                />
 
                 {/* 관련 꿈해몽 */}
                 {relatedDreams.length > 0 && (

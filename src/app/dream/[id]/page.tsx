@@ -4,12 +4,18 @@ import Link from 'next/link'
 import dreamsData from '@/data/dreams_new.json'
 import ShareButtons from '@/app/components/ShareButtons'
 
+interface RichSection {
+    title: string
+    content: string
+}
+
 interface Dream {
     id: string
     title: string
     type: 'good' | 'bad' | 'baby'
     summary: string
     detail: string
+    rich_sections?: RichSection[]
     lucky_numbers: number[]
     action_tip: string
 }
@@ -293,7 +299,16 @@ export default async function DreamDetailPage({
                     {/* 상세 해몽 */}
                     <section className="dream-detail-section">
                         <h2>📖 상세 해몽</h2>
-                        <p className="rich-text">{dream.detail}</p>
+                        {dream.rich_sections && dream.rich_sections.length > 0 ? (
+                            dream.rich_sections.map((section, idx) => (
+                                <div key={idx} className="rich-section">
+                                    <h3 className="rich-section-title">{section.title}</h3>
+                                    <p className="rich-text">{section.content}</p>
+                                </div>
+                            ))
+                        ) : (
+                            <p className="rich-text">{dream.detail}</p>
+                        )}
                     </section>
 
                     {/* 행동 팁 */}

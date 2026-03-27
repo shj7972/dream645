@@ -66,6 +66,16 @@ export const metadata: Metadata = {
             'naver-site-verification': 'ca3bdee8fb6502de13dfbf1cd243971587a0b2e5',
         },
     },
+    other: {
+        // 네이버 검색 최적화
+        'application-name': 'Dream645',
+        'mobile-web-app-capable': 'yes',
+        'apple-mobile-web-app-capable': 'yes',
+        'apple-mobile-web-app-title': 'Dream645',
+        // 네이버 블로그 공유 시 미리보기 최적화
+        'og:image:width': '1200',
+        'og:image:height': '630',
+    },
 }
 
 // WebSite 구조화 데이터 (검색엔진 사이트링크 검색창)

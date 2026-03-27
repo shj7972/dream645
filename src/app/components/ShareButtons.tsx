@@ -41,7 +41,6 @@ export default function ShareButtons({
     luckyNumbers,
 }: ShareButtonsProps) {
     const [copied, setCopied] = useState(false)
-    const [kakaoReady, setKakaoReady] = useState(false)
 
     const initKakao = useCallback(() => {
         try {
@@ -49,7 +48,6 @@ export default function ShareButtons({
                 if (!window.Kakao.isInitialized()) {
                     window.Kakao.init(KAKAO_APP_KEY)
                 }
-                setKakaoReady(true)
             }
         } catch (e) {
             console.error('Kakao SDK init error:', e)
@@ -134,16 +132,30 @@ export default function ShareButtons({
             setCopied(true)
             setTimeout(() => setCopied(false), 2000)
         } catch {
-            // Clipboard failed - fallback
-            const textArea = document.createElement('textarea')
-            textArea.value = `${title}\n${description}\n행운의 번호: ${luckyNumbers.join(', ')}\n${url}`
-            document.body.appendChild(textArea)
-            textArea.select()
-            document.execCommand('copy')
-            document.body.removeChild(textArea)
-            setCopied(true)
-            setTimeout(() => setCopied(false), 2000)
+            // clipboard API 실패 시 조용히 무시 (모던 브라우저에서는 발생하지 않음)
         }
+    }
+
+    function handleXShare() {
+        const text = encodeURIComponent(
+            `${title}\n행운의 번호: ${luckyNumbers.join(', ')}`
+        )
+        const encodedUrl = encodeURIComponent(url)
+        window.open(
+            `https://twitter.com/intent/tweet?text=${text}&url=${encodedUrl}`,
+            '_blank',
+            'noopener,noreferrer'
+        )
+    }
+
+    function handleNaverShare() {
+        const encodedUrl = encodeURIComponent(url)
+        const encodedTitle = encodeURIComponent(title)
+        window.open(
+            `https://share.naver.com/web/shareView?url=${encodedUrl}&title=${encodedTitle}`,
+            '_blank',
+            'noopener,noreferrer'
+        )
     }
 
     return (
@@ -159,15 +171,32 @@ export default function ShareButtons({
                     onClick={handleKakaoShare}
                     aria-label="카카오톡으로 공유"
                 >
-                    <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                    >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 3C6.5 3 2 6.58 2 11c0 2.83 1.87 5.32 4.69 6.72-.14.53-.52 1.94-.6 2.24-.09.37.14.37.29.27.12-.08 1.9-1.29 2.66-1.81.62.09 1.27.14 1.96.14 5.5 0 10-3.58 10-8S17.5 3 12 3z" />
                     </svg>
-                    카카오톡 공유
+                    카카오톡
+                </button>
+
+                <button
+                    className="share-btn share-btn-naver"
+                    onClick={handleNaverShare}
+                    aria-label="네이버 블로그에 공유"
+                >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M13.5 12.6L8.3 4H4v16h6.5V11.4L15.7 20H20V4h-6.5z" />
+                    </svg>
+                    네이버
+                </button>
+
+                <button
+                    className="share-btn share-btn-x"
+                    onClick={handleXShare}
+                    aria-label="X(트위터)에 공유"
+                >
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                    </svg>
+                    X
                 </button>
 
                 <button
