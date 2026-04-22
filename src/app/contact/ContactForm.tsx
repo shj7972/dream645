@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { trackEvent } from '@/lib/analytics'
 
 type FormState = 'idle' | 'loading' | 'success' | 'error'
 
@@ -20,7 +21,7 @@ export default function ContactForm() {
         setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
     }
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault()
         setFormState('loading')
         setErrorMsg('')
@@ -44,6 +45,7 @@ export default function ContactForm() {
                 return
             }
 
+            trackEvent('contact_submit', { inquiry_type: form.type })
             setFormState('success')
             setForm({ name: '', email: '', type: 'other', message: '' })
         } catch {

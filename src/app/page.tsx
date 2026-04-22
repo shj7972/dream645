@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import dreamsData from '@/data/dreams_new.json'
+import blogPosts from '@/data/blog_posts.json'
 import DreamGrid from './components/DreamGrid'
+import NewsletterForm from './components/NewsletterForm'
 
 interface Dream {
     id: string
@@ -13,6 +15,19 @@ interface Dream {
 }
 
 const dreams: Dream[] = dreamsData as Dream[]
+
+const TYPE_LABEL: Record<string, string> = { good: '길몽', bad: '흉몽', baby: '태몽' }
+const TYPE_EMOJI: Record<string, string> = { good: '🍀', bad: '🧿', baby: '👶' }
+
+// 날짜 기반으로 오늘의 꿈 선택 (매일 자정에 바뀜)
+function getDreamOfTheDay(): Dream {
+    const now = new Date()
+    const dayOfYear =
+        Math.floor(
+            (now.getTime() - new Date(now.getFullYear(), 0, 0).getTime()) / 86400000
+        )
+    return dreams[dayOfYear % dreams.length]
+}
 
 // 홈페이지 전용 JSON-LD: ItemList 스키마 (인기 꿈 목록)
 const itemListJsonLd = {
@@ -33,6 +48,12 @@ export default function Home() {
     const goodCount = dreams.filter((d) => d.type === 'good').length
     const badCount = dreams.filter((d) => d.type === 'bad').length
     const babyCount = dreams.filter((d) => d.type === 'baby').length
+
+    const todayDream = getDreamOfTheDay()
+
+    const recentBlogPosts = [...blogPosts]
+        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+        .slice(0, 3)
 
     return (
         <>
@@ -60,7 +81,7 @@ export default function Home() {
                     </div>
                 </div>
 
-                {/* SEO용 카테고리 내비게이션 - 크롤러가 카테고리 페이지를 발견 */}
+                {/* SEO용 카테고리 내비게이션 */}
                 <nav aria-label="꿈 카테고리" className="home-category-nav">
                     <Link href="/category/good" className="home-category-link type-good">
                         🍀 길몽 ({goodCount})
@@ -76,7 +97,73 @@ export default function Home() {
                 <DreamGrid dreams={dreams} />
             </header>
 
-            {/* SEO용 숨김 콘텐츠: 검색엔진이 페이지 내용을 파악할 수 있도록 서버 렌더링 */}
+            {/* 오늘의 꿈 섹션 */}
+            <section className="today-dream-section" aria-label="오늘의 꿈">
+                <div className="today-dream-inner">
+                    <div className="today-dream-header">
+                        <span className="today-dream-badge">✨ 오늘의 꿈</span>
+                        <h2 className="today-dream-title">{todayDream.title}</h2>
+                        <span className={`today-dream-type type-${todayDream.type}`}>
+                            {TYPE_EMOJI[todayDream.type]} {TYPE_LABEL[todayDream.type]}
+                        </span>
+                    </div>
+                    <p className="today-dream-summary">{todayDream.summary}</p>
+                    <div className="today-dream-numbers">
+                        <span className="today-dream-numbers-label">오늘의 행운 번호</span>
+                        <div className="lucky-numbers">
+                            {todayDream.lucky_numbers.map((num) => (
+                                <span key={num} className="number-circle">{num}</span>
+                            ))}
+                        </div>
+                    </div>
+                    <Link href={`/dream/${todayDream.id}`} className="today-dream-cta">
+                        자세한 해몽 보기 →
+                    </Link>
+                </div>
+            </section>
+
+            {/* 블로그 미리보기 섹션 */}
+            <section className="home-blog-section" aria-label="꿈해몽 블로그">
+                <div className="home-blog-inner">
+                    <div className="home-blog-header">
+                        <h2 className="home-blog-section-title">📝 꿈해몽 가이드</h2>
+                        <Link href="/blog" className="home-blog-more">
+                            전체 보기 →
+                        </Link>
+                    </div>
+                    <div className="home-blog-grid">
+                        {recentBlogPosts.map((post) => (
+                            <Link
+                                key={post.slug}
+                                href={`/blog/${post.slug}`}
+                                className="home-blog-card"
+                            >
+                                <p className="home-blog-card-title">{post.title}</p>
+                                <p className="home-blog-card-desc">{post.description}</p>
+                                <span className="home-blog-card-read">
+                                    약 {post.readTime}분 →
+                                </span>
+                            </Link>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* 뉴스레터 구독 섹션 */}
+            <section className="newsletter-section" aria-label="뉴스레터 구독">
+                <div className="newsletter-inner">
+                    <h2 className="newsletter-title">🌙 꿈해몽 소식 받아보기</h2>
+                    <p className="newsletter-desc">
+                        새로운 꿈해몽 가이드, 로또 번호 팁, 오늘의 꿈을 이메일로 받아보세요.
+                    </p>
+                    <NewsletterForm />
+                    <p className="newsletter-privacy">
+                        스팸 없음 · 언제든지 구독 취소 가능
+                    </p>
+                </div>
+            </section>
+
+            {/* SEO용 숨김 콘텐츠 */}
             <section className="seo-content" aria-label="꿈해몽 소개">
                 <h2>무료 꿈해몽 - 꿈 해석과 로또 번호 추천</h2>
                 <p>

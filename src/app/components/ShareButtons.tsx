@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react'
 import Script from 'next/script'
+import { trackEvent } from '@/lib/analytics'
 
 interface ShareButtonsProps {
     title: string
@@ -62,6 +63,7 @@ export default function ShareButtons({
     }, [initKakao])
 
     function handleKakaoShare() {
+        trackEvent('share_click', { share_platform: 'kakao' })
         if (!window.Kakao) {
             // SDK가 아직 로드되지 않은 경우 - 대체 동작으로 링크 복사
             alert('카카오톡 SDK를 로딩 중입니다. 잠시 후 다시 시도해 주세요.')
@@ -107,6 +109,7 @@ export default function ShareButtons({
     }
 
     async function handleNativeShare() {
+        trackEvent('share_click', { share_platform: 'native' })
         const shareData = {
             title: `신비의 기록 - ${title}`,
             text: `${title}\n\n${description}\n\n행운의 번호: ${luckyNumbers.join(', ')}`,
@@ -137,6 +140,7 @@ export default function ShareButtons({
     }
 
     function handleXShare() {
+        trackEvent('share_click', { share_platform: 'x' })
         const text = encodeURIComponent(
             `${title}\n행운의 번호: ${luckyNumbers.join(', ')}`
         )
@@ -149,6 +153,7 @@ export default function ShareButtons({
     }
 
     function handleNaverShare() {
+        trackEvent('share_click', { share_platform: 'naver' })
         const encodedUrl = encodeURIComponent(url)
         const encodedTitle = encodeURIComponent(title)
         window.open(

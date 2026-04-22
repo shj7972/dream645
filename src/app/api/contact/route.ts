@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
 
         const { data, error } = await resend.emails.send({
             from: 'Dream645 <onboarding@resend.dev>',
-            to: ['seo.hyunjong@gamil.com'],
+            to: ['seo.hyunjong@gmail.com'],
             subject: `[Dream645] ${typeLabel[type] ?? '문의'} - ${name}`,
             html: `
                 <h2>[Dream645] 문의가 접수되었습니다</h2>

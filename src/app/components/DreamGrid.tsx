@@ -1,7 +1,8 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect, useRef } from 'react'
 import Link from 'next/link'
+import { trackEvent } from '@/lib/analytics'
 
 interface Dream {
     id: string
@@ -26,6 +27,7 @@ const TYPE_EMOJI: Record<string, string> = {
 }
 
 const ITEMS_PER_PAGE = 12
+const MAX_RECENT = 6
 
 export default function DreamGrid({ dreams }: { dreams: Dream[] }) {
     const [searchQuery, setSearchQuery] = useState('')
@@ -37,6 +39,14 @@ export default function DreamGrid({ dreams }: { dreams: Dream[] }) {
         }
         return []
     })
+    const [recentIds, setRecentIds] = useState<string[]>(() => {
+        if (typeof window !== 'undefined') {
+            return JSON.parse(localStorage.getItem('dream_recent') || '[]')
+        }
+        return []
+    })
+
+    const searchDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
     const filteredDreams = useMemo(() => {
         return dreams.filter((dream) => {
@@ -60,14 +70,35 @@ export default function DreamGrid({ dreams }: { dreams: Dream[] }) {
         safePage * ITEMS_PER_PAGE
     )
 
+    const recentDreams = useMemo(() => {
+        return recentIds
+            .map((id) => dreams.find((d) => d.id === id))
+            .filter((d): d is Dream => d !== undefined)
+    }, [recentIds, dreams])
+
+    function recordRecent(dreamId: string) {
+        setRecentIds((prev) => {
+            const next = [dreamId, ...prev.filter((id) => id !== dreamId)].slice(0, MAX_RECENT)
+            localStorage.setItem('dream_recent', JSON.stringify(next))
+            return next
+        })
+    }
+
     function toggleFavorite(e: React.MouseEvent, dreamId: string) {
         e.preventDefault()
         e.stopPropagation()
         setFavorites((prev) => {
-            const next = prev.includes(dreamId)
-                ? prev.filter((id) => id !== dreamId)
-                : [...prev, dreamId]
+            const isAdding = !prev.includes(dreamId)
+            const next = isAdding
+                ? [...prev, dreamId]
+                : prev.filter((id) => id !== dreamId)
             localStorage.setItem('dream_favorites', JSON.stringify(next))
+            const dream = dreams.find((d) => d.id === dreamId)
+            trackEvent(isAdding ? 'favorite_add' : 'favorite_remove', {
+                dream_id: dreamId,
+                dream_title: dream?.title,
+                dream_type: dream?.type,
+            })
             return next
         })
     }
@@ -75,19 +106,31 @@ export default function DreamGrid({ dreams }: { dreams: Dream[] }) {
     function handleFilterChange(filter: string) {
         setCurrentFilter(filter)
         setCurrentPage(1)
+        trackEvent('filter_change', { filter_type: filter })
     }
 
     function handleSearch(value: string) {
         setSearchQuery(value)
         setCurrentPage(1)
+        if (searchDebounceRef.current) clearTimeout(searchDebounceRef.current)
+        if (value.trim().length >= 2) {
+            searchDebounceRef.current = setTimeout(() => {
+                trackEvent('search', { search_term: value.trim() })
+            }, 800)
+        }
     }
+
+    useEffect(() => {
+        return () => {
+            if (searchDebounceRef.current) clearTimeout(searchDebounceRef.current)
+        }
+    }, [])
 
     function goToPage(page: number) {
         setCurrentPage(page)
         window.scrollTo({ top: 0, behavior: 'smooth' })
     }
 
-    // Pagination range
     function getPageRange() {
         const maxVisible = 5
         let start = Math.max(1, safePage - Math.floor(maxVisible / 2))
@@ -140,6 +183,27 @@ export default function DreamGrid({ dreams }: { dreams: Dream[] }) {
                 </div>
             </div>
 
+            {recentDreams.length > 0 && searchQuery === '' && currentFilter === 'all' && (
+                <section className="recent-dreams-section">
+                    <h2 className="recent-dreams-title">🕐 최근 본 꿈</h2>
+                    <div className="recent-dreams-list">
+                        {recentDreams.map((dream) => (
+                            <Link
+                                key={dream.id}
+                                href={`/dream/${dream.id}`}
+                                className="recent-dream-chip"
+                                onClick={() => recordRecent(dream.id)}
+                            >
+                                <span className={`recent-chip-type type-${dream.type}`}>
+                                    {TYPE_EMOJI[dream.type]}
+                                </span>
+                                <span className="recent-chip-title">{dream.title}</span>
+                            </Link>
+                        ))}
+                    </div>
+                </section>
+            )}
+
             <main>
                 <div className="dream-grid">
                     {pageDreams.length === 0 ? (
@@ -157,6 +221,14 @@ export default function DreamGrid({ dreams }: { dreams: Dream[] }) {
                                         textDecoration: 'none',
                                         color: 'inherit',
                                         position: 'relative',
+                                    }}
+                                    onClick={() => {
+                                        recordRecent(dream.id)
+                                        trackEvent('dream_view', {
+                                            dream_id: dream.id,
+                                            dream_title: dream.title,
+                                            dream_type: dream.type,
+                                        })
                                     }}
                                 >
                                     <span
