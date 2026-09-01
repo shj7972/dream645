@@ -3,6 +3,7 @@ import dreamsData from '@/data/dreams_new.json'
 import blogPosts from '@/data/blog_posts.json'
 import DreamGrid from './components/DreamGrid'
 import NewsletterForm from './components/NewsletterForm'
+import AdUnit from './components/AdUnit'
 
 interface Dream {
     id: string
@@ -121,6 +122,9 @@ export default function Home() {
                     </Link>
                 </div>
             </section>
+
+            {/* 광고: 메인 중단 */}
+            <AdUnit slot="7981263686" minHeight={100} />
 
             {/* 블로그 미리보기 섹션 */}
             <section className="home-blog-section" aria-label="꿈해몽 블로그">

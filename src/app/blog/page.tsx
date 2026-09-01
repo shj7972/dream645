@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import blogPosts from '@/data/blog_posts.json'
+import AdUnit from '../components/AdUnit'
 
 export const metadata: Metadata = {
     title: '꿈해몽 블로그 - 꿈 해석 가이드와 팁',
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
         canonical: 'https://www.dream645.kr/blog',
     },
     openGraph: {
-        title: '꿈해몽 블로그 - 꿈 해석 가이드와 팁 | Dream645',
+        title: '꿈해몽 블로그 - 꿈 해석 가이드와 팁',
         description:
             '꿈해몽 방법, 태몽 가이드, 악몽 대처법, 로또 번호 선택법 등 꿈에 대한 모든 정보를 확인하세요.',
         url: 'https://www.dream645.kr/blog',
@@ -72,6 +73,9 @@ export default function BlogListPage() {
                         꿈의 의미부터 활용법까지, 꿈에 대한 모든 이야기
                     </p>
                 </section>
+
+                {/* 광고: 목록 상단 */}
+                <AdUnit slot="7981263686" minHeight={100} />
 
                 <section className="blog-grid" aria-label="블로그 글 목록">
                     {sortedPosts.map((post) => {

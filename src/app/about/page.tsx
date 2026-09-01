@@ -2,14 +2,14 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-    title: '서비스 소개 | Dream645',
+    title: '서비스 소개',
     description:
         'Dream645 신비의 기록은 한국 전통 꿈해몽 문화와 심리학적 해석을 결합한 무료 꿈 해석 서비스입니다. 1,200개 이상의 꿈 데이터베이스를 보유합니다.',
     alternates: {
         canonical: 'https://www.dream645.kr/about',
     },
     openGraph: {
-        title: '서비스 소개 | Dream645',
+        title: '서비스 소개',
         description: 'Dream645 신비의 기록 서비스 소개',
         url: 'https://www.dream645.kr/about',
         siteName: 'Dream645',

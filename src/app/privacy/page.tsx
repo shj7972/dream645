@@ -2,14 +2,14 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-    title: '개인정보처리방침 | Dream645',
+    title: '개인정보처리방침',
     description:
         'Dream645 신비의 기록 개인정보처리방침입니다. 수집하는 개인정보의 항목, 이용 목적, 보유 기간 등을 안내합니다.',
     alternates: {
         canonical: 'https://www.dream645.kr/privacy',
     },
     openGraph: {
-        title: '개인정보처리방침 | Dream645',
+        title: '개인정보처리방침',
         description: 'Dream645 신비의 기록 개인정보처리방침',
         url: 'https://www.dream645.kr/privacy',
         siteName: 'Dream645',

@@ -2,7 +2,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-    title: '페이지를 찾을 수 없습니다 | Dream645',
+    title: '페이지를 찾을 수 없습니다',
     description: '요청하신 페이지를 찾을 수 없습니다. Dream645에서 꿈해몽을 검색해 보세요.',
 }
 

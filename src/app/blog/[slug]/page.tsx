@@ -4,6 +4,7 @@ import Link from 'next/link'
 import blogPosts from '@/data/blog_posts.json'
 import dreamsData from '@/data/dreams_new.json'
 import BlogShareButtons from '@/app/components/BlogShareButtons'
+import AdUnit from '@/app/components/AdUnit'
 
 interface BlogPost {
     slug: string
@@ -59,7 +60,7 @@ export async function generateMetadata({
     const post = posts.find((p) => p.slug === slug)
 
     if (!post) {
-        return { title: '글을 찾을 수 없습니다 | Dream645' }
+        return { title: '글을 찾을 수 없습니다' }
     }
 
     const categoryConfig: Record<string, string[]> = {
@@ -77,7 +78,7 @@ export async function generateMetadata({
         .map((w) => `${w} 해몽`)
 
     return {
-        title: `${post.title} | Dream645 블로그`,
+        title: `${post.title} — 꿈해몽 블로그`,
         description: post.description,
         keywords: [
             post.title,
@@ -93,7 +94,7 @@ export async function generateMetadata({
             canonical: `https://www.dream645.kr/blog/${post.slug}`,
         },
         openGraph: {
-            title: `${post.title} | Dream645`,
+            title: post.title,
             description: post.description,
             url: `https://www.dream645.kr/blog/${post.slug}`,
             siteName: 'Dream645',
@@ -301,6 +302,9 @@ export default async function BlogDetailPage({
                 />
 
                 {/* 관련 꿈해몽 */}
+                {/* 광고: 본문 하단 */}
+                <AdUnit slot="7981263686" minHeight={100} />
+
                 {relatedDreams.length > 0 && (
                     <aside className="related-dreams-section">
                         <h2>🔮 관련 꿈해몽</h2>

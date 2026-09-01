@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import dreamsData from '@/data/dreams_new.json'
+import AdUnit from '@/app/components/AdUnit'
 
 interface Dream {
     id: string
@@ -168,7 +169,7 @@ export async function generateMetadata({
     const meta = TYPE_META[type]
 
     if (!meta) {
-        return { title: '카테고리를 찾을 수 없습니다 | Dream645' }
+        return { title: '카테고리를 찾을 수 없습니다' }
     }
 
     return {
@@ -179,7 +180,7 @@ export async function generateMetadata({
             canonical: `https://www.dream645.kr/category/${type}`,
         },
         openGraph: {
-            title: `${meta.title} | Dream645`,
+            title: meta.title,
             description: meta.description,
             url: `https://www.dream645.kr/category/${type}`,
             siteName: 'Dream645',
@@ -302,6 +303,9 @@ export default async function CategoryPage({
                         {meta.label}
                     </p>
                 </section>
+
+                {/* 광고: 목록 상단 */}
+                <AdUnit slot="7981263686" minHeight={100} />
 
                 <section
                     className="category-grid"

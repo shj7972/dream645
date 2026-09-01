@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import dreamsData from '@/data/dreams_new.json'
 import ShareButtons from '@/app/components/ShareButtons'
+import AdUnit from '@/app/components/AdUnit'
 
 interface RichSection {
     title: string
@@ -54,12 +55,12 @@ export async function generateMetadata({
     const dream = dreams.find((d) => d.id === id)
 
     if (!dream) {
-        return { title: '꿈을 찾을 수 없습니다 | Dream645' }
+        return { title: '꿈을 찾을 수 없습니다' }
     }
 
     const typeLabel = TYPE_LABELS[dream.type]
     const keyword = dream.title.replace(/ 꿈$/, '')
-    const title = `${dream.title} 해몽 - ${typeLabel} | Dream645`
+    const title = `${dream.title} 해몽 - ${typeLabel}`
     const description = `${keyword} 꿈의 의미와 해석을 알아보세요. ${typeLabel}인 이 꿈의 상세 해몽, 행운의 로또 번호(${dream.lucky_numbers.join(', ')}), 행동 팁까지 무료로 확인하세요.`
 
     return {
@@ -267,6 +268,9 @@ export default async function DreamDetailPage({
                     {/* 제목 (H1) */}
                     <h1 className="dream-detail-title">{dream.title} 해몽</h1>
 
+                    {/* 광고: 상단 */}
+                    <AdUnit slot="7981263686" minHeight={100} />
+
                     {/* 인트로 섹션 */}
                     <section className="intro-section rich-text">
                         <p>{typeIntro[dream.type]}</p>
@@ -310,6 +314,9 @@ export default async function DreamDetailPage({
                             <p className="rich-text">{dream.detail}</p>
                         )}
                     </section>
+
+                    {/* 광고: 본문 중단 */}
+                    <AdUnit slot="7981263686" minHeight={100} />
 
                     {/* 행동 팁 */}
                     <section className="action-tip-box">
@@ -379,6 +386,9 @@ export default async function DreamDetailPage({
                             </details>
                         </div>
                     </section>
+
+                    {/* 광고: 하단 */}
+                    <AdUnit slot="7981263686" minHeight={100} />
 
                     {/* 꿈해몽 활용법 (고정 콘텐츠) */}
                     <section className="static-content-box rich-text">
