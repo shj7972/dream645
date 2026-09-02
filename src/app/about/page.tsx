@@ -106,6 +106,68 @@ export default function AboutPage() {
                     </section>
 
                     <section className="rich-text" style={{ marginBottom: '2rem' }}>
+                        <h2>콘텐츠 작성 및 감수</h2>
+                        <p>
+                            Dream645의 모든 꿈해몽 콘텐츠는 동일한 작성 및 감수 프로세스를 거칩니다.
+                            각 꿈 항목은 전통 해몽서의 원전 내용을 1차 자료로 삼고,
+                            프로이트·융·인지심리학의 학술 자료를 2차 해석 근거로 활용하여
+                            작성됩니다. 작성된 초안은 내부 검수를 거쳐 팩트 오류,
+                            과도한 미신적 표현, 의학적 오해 가능성을 점검한 뒤 게시합니다.
+                        </p>
+                        <p style={{ marginTop: '0.75rem' }}>
+                            꿈해몽 콘텐츠는 전통 문화 자료와 심리학 연구를 기반으로 하지만,
+                            의학적 진단이나 심리 치료를 목적으로 하지 않습니다.
+                            지속적인 불면, 악몽, 수면 관련 문제가 있는 경우
+                            의사나 수면 전문가의 진료를 받으시기를 권합니다.
+                        </p>
+                    </section>
+
+                    <section className="rich-text" style={{ marginBottom: '2rem' }}>
+                        <h2>참고 자료 및 출처 투명화</h2>
+                        <p>
+                            Dream645 콘텐츠의 작성 근거가 되는 자료 유형은 다음과 같습니다.
+                        </p>
+                        <ul style={{ paddingLeft: '1.5rem', marginTop: '0.75rem' }}>
+                            <li>
+                                <strong>동아시아 전통 해몽서</strong>:
+                                조선시대 해몽 관련 문헌, 중국 고대 해몽서,
+                                일본 민간 해몽 자료 등 역사적 출전을 참고합니다.
+                            </li>
+                            <li>
+                                <strong>심리학 저작</strong>:
+                                프로이트「꿈의 해석」, 융「인간과 상징」,
+                                현대 인지행동치료 및 수면 심리학 관련 논문과 저술을 반영합니다.
+                            </li>
+                            <li>
+                                <strong>민속 문화 자료</strong>:
+                                한국 구비문학, 민담, 풍속 기록 중
+                                꿈과 관련된 자료를 수집하여 참고합니다.
+                            </li>
+                            <li>
+                                <strong>수면 과학 연구</strong>:
+                                REM 수면, 꿈 회상, 반복 꿈 관련
+                                학술 연구 결과를 해석에 반영합니다.
+                            </li>
+                        </ul>
+                        <p style={{ marginTop: '0.75rem' }}>
+                            개별 꿈 항목의 해석은 복수의 자료를 교차 검토하여 작성되며,
+                            전통적 해석과 심리학적 해석을 명확히 구분하여 제시합니다.
+                        </p>
+                    </section>
+
+                    <section className="rich-text" style={{ marginBottom: '2rem' }}>
+                        <h2>면책 고지</h2>
+                        <p>
+                            Dream645의 꿈해몽 콘텐츠는 한국 전통 문화와 심리학적 해석을
+                            결합한 참고 자료로 제공됩니다. 본 콘텐츠는 의학적 진단,
+                            심리 치료적 조언, 또는 전문가 상담을 대체하지 않습니다.
+                            꿈해몽은 문화적 전통과 심리적 성찰의 도구로 이해하시고,
+                            건강·정신 건강 관련 문제가 지속되는 경우 반드시
+                            의사나 전문가의 진료를 받으시기 바랍니다.
+                        </p>
+                    </section>
+
+                    <section className="rich-text" style={{ marginBottom: '2rem' }}>
                         <h2>연락처</h2>
                         <p>
                             서비스 관련 문의, 콘텐츠 오류 제보, 광고 문의는 문의 페이지를 이용해 주세요.
@@ -114,6 +176,12 @@ export default function AboutPage() {
                             <Link href="/contact" style={{ color: 'var(--accent-color)' }}>
                                 문의 페이지 바로가기 →
                             </Link>
+                        </p>
+                    </section>
+
+                    <section className="rich-text" style={{ marginBottom: '2rem' }}>
+                        <p style={{ fontSize: '0.875rem', color: '#888' }}>
+                            최종 업데이트: 2026-09-02
                         </p>
                     </section>
                 </article>
