@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
                 disallow: ['/api/', '/_next/'],
             },
         ],
-        sitemap: 'https://www.dream645.kr/sitemap.xml',
-        host: 'https://www.dream645.kr',
+        sitemap: 'https://dream645.kr/sitemap.xml',
+        host: 'https://dream645.kr',
     }
 }

@@ -8,13 +8,13 @@ export const metadata: Metadata = {
     description:
         '꿈해몽 방법, 태몽 가이드, 악몽 대처법, 로또 번호 선택법 등 꿈에 대한 모든 정보를 확인하세요.',
     alternates: {
-        canonical: 'https://www.dream645.kr/blog',
+        canonical: 'https://dream645.kr/blog',
     },
     openGraph: {
         title: '꿈해몽 블로그 - 꿈 해석 가이드와 팁',
         description:
             '꿈해몽 방법, 태몽 가이드, 악몽 대처법, 로또 번호 선택법 등 꿈에 대한 모든 정보를 확인하세요.',
-        url: 'https://www.dream645.kr/blog',
+        url: 'https://dream645.kr/blog',
         siteName: 'Dream645',
         locale: 'ko_KR',
         type: 'website',
@@ -37,13 +37,13 @@ export default function BlogListPage() {
         '@type': 'Blog',
         name: '꿈해몽 블로그',
         description: '꿈 해석, 태몽, 꿈해몽 가이드 등 꿈에 대한 블로그',
-        url: 'https://www.dream645.kr/blog',
+        url: 'https://dream645.kr/blog',
         blogPost: sortedPosts.map((post) => ({
             '@type': 'BlogPosting',
             headline: post.title,
             description: post.description,
             datePublished: post.date,
-            url: `https://www.dream645.kr/blog/${post.slug}`,
+            url: `https://dream645.kr/blog/${post.slug}`,
         })),
     }
 

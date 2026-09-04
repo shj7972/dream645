@@ -177,12 +177,12 @@ export async function generateMetadata({
         description: meta.description,
         keywords: meta.keywords,
         alternates: {
-            canonical: `https://www.dream645.kr/category/${type}`,
+            canonical: `https://dream645.kr/category/${type}`,
         },
         openGraph: {
             title: meta.title,
             description: meta.description,
-            url: `https://www.dream645.kr/category/${type}`,
+            url: `https://dream645.kr/category/${type}`,
             siteName: 'Dream645',
             locale: 'ko_KR',
             type: 'website',
@@ -221,7 +221,7 @@ export default async function CategoryPage({
                 '@type': 'ListItem',
                 position: 1,
                 name: '홈',
-                item: 'https://www.dream645.kr',
+                item: 'https://dream645.kr',
             },
             {
                 '@type': 'ListItem',
@@ -237,11 +237,11 @@ export default async function CategoryPage({
         '@type': 'CollectionPage',
         name: meta.title,
         description: meta.description,
-        url: `https://www.dream645.kr/category/${type}`,
+        url: `https://dream645.kr/category/${type}`,
         isPartOf: {
             '@type': 'WebSite',
             name: 'Dream645',
-            url: 'https://www.dream645.kr',
+            url: 'https://dream645.kr',
         },
     }
 

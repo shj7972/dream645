@@ -91,12 +91,12 @@ export async function generateMetadata({
             '2026년 꿈해몽',
         ],
         alternates: {
-            canonical: `https://www.dream645.kr/blog/${post.slug}`,
+            canonical: `https://dream645.kr/blog/${post.slug}`,
         },
         openGraph: {
             title: post.title,
             description: post.description,
-            url: `https://www.dream645.kr/blog/${post.slug}`,
+            url: `https://dream645.kr/blog/${post.slug}`,
             siteName: 'Dream645',
             locale: 'ko_KR',
             type: 'article',
@@ -104,7 +104,7 @@ export async function generateMetadata({
             modifiedTime: post.date,
             images: [
                 {
-                    url: `https://www.dream645.kr/blog/${post.slug}/opengraph-image`,
+                    url: `https://dream645.kr/blog/${post.slug}/opengraph-image`,
                     width: 1200,
                     height: 630,
                     alt: post.title,
@@ -115,7 +115,7 @@ export async function generateMetadata({
             card: 'summary_large_image',
             title: post.title,
             description: post.description,
-            images: [`https://www.dream645.kr/blog/${post.slug}/opengraph-image`],
+            images: [`https://dream645.kr/blog/${post.slug}/opengraph-image`],
         },
     }
 }
@@ -152,19 +152,19 @@ export default async function BlogDetailPage({
         author: {
             '@type': 'Organization',
             name: 'Dream645',
-            url: 'https://www.dream645.kr',
+            url: 'https://dream645.kr',
         },
         publisher: {
             '@type': 'Organization',
             name: 'Dream645',
             logo: {
                 '@type': 'ImageObject',
-                url: 'https://www.dream645.kr/logo.png',
+                url: 'https://dream645.kr/logo.png',
             },
         },
         mainEntityOfPage: {
             '@type': 'WebPage',
-            '@id': `https://www.dream645.kr/blog/${post.slug}`,
+            '@id': `https://dream645.kr/blog/${post.slug}`,
         },
     }
 
@@ -207,13 +207,13 @@ export default async function BlogDetailPage({
                 '@type': 'ListItem',
                 position: 1,
                 name: '홈',
-                item: 'https://www.dream645.kr',
+                item: 'https://dream645.kr',
             },
             {
                 '@type': 'ListItem',
                 position: 2,
                 name: '블로그',
-                item: 'https://www.dream645.kr/blog',
+                item: 'https://dream645.kr/blog',
             },
             {
                 '@type': 'ListItem',
@@ -298,7 +298,7 @@ export default async function BlogDetailPage({
                 <BlogShareButtons
                     title={post.title}
                     description={post.description}
-                    url={`https://www.dream645.kr/blog/${post.slug}`}
+                    url={`https://dream645.kr/blog/${post.slug}`}
                 />
 
                 {/* 관련 꿈해몽 */}

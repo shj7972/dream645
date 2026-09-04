@@ -11,7 +11,7 @@ const notoSansKR = Noto_Sans_KR({
 })
 
 export const metadata: Metadata = {
-    metadataBase: new URL('https://www.dream645.kr'),
+    metadataBase: new URL('https://dream645.kr'),
     title: {
         default: 'Dream645 - 무료 꿈해몽 & 로또 번호 추천',
         template: '%s | Dream645',
@@ -32,16 +32,16 @@ export const metadata: Metadata = {
         '행운의 숫자',
     ],
     alternates: {
-        canonical: 'https://www.dream645.kr',
+        canonical: 'https://dream645.kr',
         languages: {
-            'ko-KR': 'https://www.dream645.kr',
+            'ko-KR': 'https://dream645.kr',
         },
     },
     openGraph: {
         title: 'Dream645 - 무료 꿈해몽 & 로또 번호 추천',
         description:
             '어젯밤 꿈이 로또 당첨의 신호일까요? 꿈해몽 분석과 AI가 추천하는 행운의 번호를 무료로 확인하세요.',
-        url: 'https://www.dream645.kr',
+        url: 'https://dream645.kr',
         siteName: 'Dream645',
         locale: 'ko_KR',
         type: 'website',
@@ -83,12 +83,12 @@ const websiteJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'Dream645 - 신비의 기록',
-    url: 'https://www.dream645.kr',
+    url: 'https://dream645.kr',
     description:
         '무료 꿈해몽과 AI 로또 번호 추천 서비스. 길몽, 흉몽, 태몽 분석부터 행운의 숫자까지.',
     potentialAction: {
         '@type': 'SearchAction',
-        target: 'https://www.dream645.kr/?q={search_term_string}',
+        target: 'https://dream645.kr/?q={search_term_string}',
         'query-input': 'required name=search_term_string',
     },
 }
@@ -97,8 +97,8 @@ const organizationJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'Dream645',
-    url: 'https://www.dream645.kr',
-    logo: 'https://www.dream645.kr/logo.png',
+    url: 'https://dream645.kr',
+    logo: 'https://dream645.kr/logo.png',
 }
 
 export default function RootLayout({

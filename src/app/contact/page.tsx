@@ -7,12 +7,12 @@ export const metadata: Metadata = {
     description:
         'Dream645 신비의 기록에 문의하세요. 콘텐츠 오류 제보, 서비스 개선 의견, 광고 문의를 환영합니다.',
     alternates: {
-        canonical: 'https://www.dream645.kr/contact',
+        canonical: 'https://dream645.kr/contact',
     },
     openGraph: {
         title: '문의하기',
         description: 'Dream645에 문의하세요.',
-        url: 'https://www.dream645.kr/contact',
+        url: 'https://dream645.kr/contact',
         siteName: 'Dream645',
         locale: 'ko_KR',
         type: 'website',

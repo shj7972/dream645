@@ -41,7 +41,7 @@ const itemListJsonLd = {
         '@type': 'ListItem',
         position: index + 1,
         name: dream.title,
-        url: `https://www.dream645.kr/dream/${dream.id}`,
+        url: `https://dream645.kr/dream/${dream.id}`,
     })),
 }
 

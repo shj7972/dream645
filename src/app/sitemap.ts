@@ -13,7 +13,7 @@ interface Dream {
 }
 
 const dreams: Dream[] = dreamsData as Dream[]
-const BASE_URL = 'https://www.dream645.kr'
+const BASE_URL = 'https://dream645.kr'
 
 export default function sitemap(): MetadataRoute.Sitemap {
     // 정적 라우트

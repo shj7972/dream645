@@ -85,12 +85,12 @@ export async function generateMetadata({
             '2026년 꿈해몽',
         ],
         alternates: {
-            canonical: `https://www.dream645.kr/dream/${dream.id}`,
+            canonical: `https://dream645.kr/dream/${dream.id}`,
         },
         openGraph: {
             title,
             description,
-            url: `https://www.dream645.kr/dream/${dream.id}`,
+            url: `https://dream645.kr/dream/${dream.id}`,
             siteName: 'Dream645',
             locale: 'ko_KR',
             type: 'article',
@@ -155,21 +155,21 @@ export default async function DreamDetailPage({
         author: {
             '@type': 'Organization',
             name: 'Dream645',
-            url: 'https://www.dream645.kr',
+            url: 'https://dream645.kr',
         },
         publisher: {
             '@type': 'Organization',
             name: 'Dream645',
             logo: {
                 '@type': 'ImageObject',
-                url: 'https://www.dream645.kr/logo.png',
+                url: 'https://dream645.kr/logo.png',
             },
         },
         mainEntityOfPage: {
             '@type': 'WebPage',
-            '@id': `https://www.dream645.kr/dream/${dream.id}`,
+            '@id': `https://dream645.kr/dream/${dream.id}`,
         },
-        image: `https://www.dream645.kr/cat_${dream.type}.png`,
+        image: `https://dream645.kr/cat_${dream.type}.png`,
     }
 
     const faqJsonLd = {
@@ -211,13 +211,13 @@ export default async function DreamDetailPage({
                 '@type': 'ListItem',
                 position: 1,
                 name: '홈',
-                item: 'https://www.dream645.kr',
+                item: 'https://dream645.kr',
             },
             {
                 '@type': 'ListItem',
                 position: 2,
                 name: typeLabel,
-                item: `https://www.dream645.kr/category/${dream.type}`,
+                item: `https://dream645.kr/category/${dream.type}`,
             },
             {
                 '@type': 'ListItem',
@@ -340,8 +340,8 @@ export default async function DreamDetailPage({
                     <ShareButtons
                         title={`${dream.title} 해몽`}
                         description={dream.summary}
-                        url={`https://www.dream645.kr/dream/${dream.id}`}
-                        imageUrl={`https://www.dream645.kr/og-image.jpg`}
+                        url={`https://dream645.kr/dream/${dream.id}`}
+                        imageUrl={`https://dream645.kr/og-image.jpg`}
                         type={dream.type}
                         luckyNumbers={dream.lucky_numbers}
                     />
